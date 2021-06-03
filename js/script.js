@@ -1,3 +1,7 @@
+window.onload = function() {
+  ButtonClick();
+};
+
 function FindPosition(oElement)
 {
   if(typeof( oElement.offsetParent ) != "undefined")
