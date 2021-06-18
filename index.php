@@ -10,30 +10,34 @@
         <button id = "show_btn" onclick="ButtonClick()">Show all labels</button>
         <div id="container">
 
-            <?php
-            echo "<img src='" . $_GET["imgId"] . "' id = 'imgToLabel'>";
-            ?>
-
-            <div id = "form_cont">
+            <div id = "form_container">
                 <form action="labels_db.php" method="post">
 
                 <label for = "label">Label</label>
-                    <input type="text" name="label" id="label" value="example label"><br>
+                    <input type="text" name="label" id="label" value="example label" oninput = "UpdateLabelText()"><br>
                     
                     <label for = "X">X</label>
-                    <input type="text" name="X" id="X">
+                    <input type="text" name="X" id="X" value = "0">
 
                     <label for = "label">Y</label>
-                    <input type="text" name="Y" id="Y">
+                    <input type="text" name="Y" id="Y" value = "0">
                     
                     <button type="button" onclick="SaveLabel()">Add new label</button>
                 </form>
-                <p id = "message"></p>
+            
+            <div id = "msg_container">
+                <p id = "message">Кликнете върху снимката или въведете координати!</p>
             </div>
+        </div>
 
-            <div class="text-block" id="text">
-                <p>example label</p>
-            </div>
+        <div id = "img_container">
+            <?php
+            echo "<img src='" . $_GET["imgId"] . "' id = 'imgToLabel'>";
+            ?>
+        </div>
+
+        <div class="text-block" id="text">
+            <p>example label</p>
         </div>
 
     </div>

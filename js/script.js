@@ -1,3 +1,8 @@
+window.onload = function() {
+  ButtonClick();
+  console.log(document.getElementById("text").innerHTML);
+};
+
 function FindPosition(oElement)
 {
   if(typeof( oElement.offsetParent ) != "undefined")
@@ -24,9 +29,8 @@ function SaveLabel() {
   xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById("message").innerHTML="Анотацията е запазена!";
-        document.getElementById("message").style.display = "block";
         setTimeout(function() {
-          document.getElementById("message").style.display = "none";
+          document.getElementById("message").innerHTML = "Кликнете върху снимката или въведете координати";
       }, 2000); // <-- time in millisecond
       }
   };
@@ -60,7 +64,6 @@ function HideLabels()
 function ButtonClick()
 {
   var btn = document.getElementById("show_btn");
-  console.log(btn);
   if(ShowLabels){
     ShowAllLabels();
     btn.innerHTML = "Hide labels";
@@ -71,6 +74,12 @@ function ButtonClick()
     btn.style.backgroundColor = "green";
   }
   ShowLabels = !ShowLabels;
+}
+
+function UpdateLabelText(){
+  var x = document.getElementById("label").value;
+  document.getElementById("text").innerHTML = '<p>' + x + '</p>';
+  console.log(document.getElementById("text").innerHTML);
 }
 
 function ShowAllLabels()
@@ -105,9 +114,10 @@ function ShowAllLabels()
         
         document.getElementById("container").appendChild(element);
         var ImgPos = FindPosition(myImg);
-
-        element.style.left = parseInt(label["x"]) + parseInt(ImgPos[0]);
-        element.style.top = parseInt(label["y"])  + parseInt(ImgPos[1]);
+        
+        var img = document.getElementById("imgToLabel");
+        element.style.left = parseFloat(label["x"]) *  + img.clientWidth + parseInt(ImgPos[0]);
+        element.style.top = parseInt(label["y"]) * img.clientHeight + parseInt(ImgPos[1]);
         element.style.display = "block";
       }
     }
@@ -136,8 +146,13 @@ function GetCoordinates(e)
     document.getElementById("text").style.top = PosY;
   PosX = PosX - ImgPos[0];
   PosY = PosY - ImgPos[1];
-  document.getElementById("X").value = PosX;
-  document.getElementById("Y").value = PosY;
+  var img = document.getElementById("imgToLabel");
+  let x = parseFloat(PosX) / img.clientWidth;
+  let y = parseFloat(PosY) / img.clientHeight;
+  x = x.toFixed(3);
+  y = y.toFixed(3);
+  document.getElementById("X").value = x;
+  document.getElementById("Y").value = y;
   document.querySelector("#text p").innerHTML = document.getElementById("label").value;
 
 }

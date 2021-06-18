@@ -21,6 +21,10 @@ html{
     padding: 20px;
   }
 
+  #message{
+    float: right;
+  }
+
   #main{
     width: 60%;
     margin: auto;
@@ -43,7 +47,7 @@ html{
   }
 
   input[type=text], select {
-    width: 100%;
+    width: 150px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -53,7 +57,7 @@ html{
   }
   
   input[type=submit] {
-    width: 100%;
+    width: 150px;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -67,4 +71,12 @@ html{
     background-color: #45a049;
   }
 
-  
+  #form_container{
+    width: 800px;
+    display: inline-block;
+  }
+
+  #msg_container{
+    /* width: 200px; */
+    display: inline-block;
+  }
