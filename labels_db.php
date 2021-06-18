@@ -13,46 +13,57 @@ try {
   //set the content-type for http response
   header('Content-Type: application/json');
 
-  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  $requestUrl = $_SERVER['REQUEST_URI'];
+  if (strpos($requestUrl, '/search')){
+    $term = $_GET["term"];
+
+        $sql = "SELECT text, imgId FROM LABEL";
+    
+        $select_labels = $conn->prepare($sql);
+        $select_labels->execute();
+        $rows = $select_labels->fetchAll(PDO::FETCH_ASSOC);
+        $results = array();
+
+        foreach($rows as $label){
+            if(strpos($label["text"], $term)){
+                array_push($results, $label["imgId"]);
+            }
+        }
+        echo json_encode($results);
+  } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     //if get request, return all labels of the image with the given id
     //the imgId is a request paramemer from a GET request
     $imgId = $_GET["imgId"];
     
-    $sql = "SELECT * FROM LABEL WHERE imgId = '" . $imgId . "'";
+    $sql = "SELECT * FROM LABEL WHERE imgId = :imgId";
     
-    $query = $conn->query($sql) or die("failed!");
-    
-    $rows = $query->fetchAll(PDO::FETCH_ASSOC);
-    //print the labels as a json
+    $select_labels = $conn->prepare($sql);
+    $select_labels->execute(array(':imgId' => $imgId));
+    $rows = $select_labels->fetchAll(PDO::FETCH_ASSOC);
+
     echo json_encode($rows);
 
   } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = json_decode(file_get_contents('php://input'), true);
-
     $imgId = $data["imgId"];
-    // $imgId = basename($imgId);
 
-    $x = $data["X"];
-    $y = $data["Y"];
-    $label_text = $data["label"];
+    $sql = "SELECT * FROM image WHERE imgId = :imgId";
+    $check_if_image_exists = $conn->prepare($sql);
 
-
-    $check_if_exists = "SELECT * FROM image WHERE imgId = '" . $imgId . "'";
-
-    $rows = array();
-    $query = $conn->query($check_if_exists) or die("failed!");
-    $row = $query->fetch(PDO::FETCH_ASSOC);
+    $check_if_image_exists->execute(array(':imgId' => $imgId)) or die("failed!");
+    $row = $check_if_image_exists->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
-      $sql = "INSERT INTO image (imgId) VALUES ('{$imgId}')";
-      $query = $conn->query($sql) or die("failed!");
+      $sql = "INSERT INTO image (imgId) VALUES (:imgId)";
+      $insert_image = $conn->prepare($sql);
+      $insert_image->execute(array(':imgId' => $imgId)) or die("failed!");
     }
 
-    $sql = "INSERT INTO label (id, text, x, y, imgId) 
-    VALUES (NULL, '{$label_text}', '{$x}', '{$y}', '{$imgId}')";
-
-    $query = $conn->query($sql) or die("failed!");
+    $sql = "INSERT INTO label (text, x, y, imgId)
+              VALUES (:label, :X, :Y, :imgId)";
+    $insert_label = $conn->prepare($sql);
+    $insert_label->execute($data) or die("failed!");
   }
 } catch (PDOException $e) {
   echo "Connection failed: " . $e->getMessage();

@@ -1,6 +1,5 @@
 window.onload = function() {
   ButtonClick();
-  console.log(document.getElementById("text").innerHTML);
 };
 
 function FindPosition(oElement)
@@ -117,7 +116,7 @@ function ShowAllLabels()
         
         var img = document.getElementById("imgToLabel");
         element.style.left = parseFloat(label["x"]) *  + img.clientWidth + parseInt(ImgPos[0]);
-        element.style.top = parseInt(label["y"]) * img.clientHeight + parseInt(ImgPos[1]);
+        element.style.top = parseFloat(label["y"]) * img.clientHeight + parseInt(ImgPos[1]);
         element.style.display = "block";
       }
     }
