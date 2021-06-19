@@ -1,5 +1,8 @@
 window.onload = function() {
   ButtonClick();
+  ImgPos = FindPosition(document.getElementById("imgToLabel"));
+  document.getElementById("text").style.left = ImgPos[0];
+  document.getElementById("text").style.top = ImgPos[1];
 };
 
 function FindPosition(oElement)
@@ -70,7 +73,7 @@ function ButtonClick()
   }else{
     HideLabels();
     btn.innerHTML = "Show labels";
-    btn.style.backgroundColor = "green";
+    btn.style.backgroundColor = "#2196F3";
   }
   ShowLabels = !ShowLabels;
 }
@@ -122,6 +125,10 @@ function ShowAllLabels()
     }
 }
 
+function deleteLabel(){
+  
+}
+
 function GetCoordinates(e)
 {
   var PosX = 0;
@@ -141,8 +148,11 @@ function GetCoordinates(e)
       PosY = e.clientY + document.body.scrollTop
         + document.documentElement.scrollTop;
     }
+
+    // document.getElementById("text").style.display = "block";
     document.getElementById("text").style.left = PosX;
     document.getElementById("text").style.top = PosY;
+    // console.log(PosX);
   PosX = PosX - ImgPos[0];
   PosY = PosY - ImgPos[1];
   var img = document.getElementById("imgToLabel");

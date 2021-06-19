@@ -4,9 +4,17 @@
 </head>
 
 <body>
-    <h1>Image annotation tool</h1>
+    <div class="topnav">
+    <a class="active" href="home.php">Home</a>
+    <div class="search-container">
+        <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    </div>
     <div id="main">
-        <p>Това е просто приложение за анотиране на картинки. Напишете текста на анотацията във полето 'Label', след това натиснете Add new Label, за да запазите анотацията.</p>
+        <p>Напишете текста на анотацията във полето 'Label', след това натиснете Add new Label, за да запазите анотацията.</p>
         <button id = "show_btn" onclick="ButtonClick()">Show all labels</button>
         <div id="container">
 
