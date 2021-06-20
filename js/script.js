@@ -125,7 +125,7 @@ function ShowAllLabels()
     }
 }
 
-function deleteLabel(){
+function deleteLabel(element){
   
 }
 
