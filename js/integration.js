@@ -1,5 +1,5 @@
 
-var annotation_tool_link = "http://localhost/annotation_tool/index.php";
+var annotation_tool_link = "http://localhost/annotation_tool/label_page.php";
 var images = document.getElementsByTagName('img');
 var srcList = [];
 for(var i = 0; i < images.length; i++) {
