@@ -44,13 +44,15 @@ function SaveLabel() {
   var X = document.getElementById('X').value;
   var Y = document.getElementById('Y').value;
   var label = document.getElementById('label').value;
-
-  xhttp.send(JSON.stringify({
+  var css = document.getElementById('css').value;
+  var JSON_string = JSON.stringify({
       "imgId": imgId,
       "X": X,
       "Y": Y,
-      "label": label
-  }));
+      "label": label,
+      "css" : css
+  });
+  xhttp.send(JSON_string);
 }
 
 var ShowLabels = true;
@@ -121,12 +123,13 @@ function ShowAllLabels()
         element.style.left = parseFloat(label["x"]) *  + img.clientWidth + parseInt(ImgPos[0]);
         element.style.top = parseFloat(label["y"]) * img.clientHeight + parseInt(ImgPos[1]);
         element.style.display = "block";
+        element.style.cssText += label["css"];
       }
     }
 }
 
-function deleteLabel(element){
-  
+function ImportJson(){
+  return true;
 }
 
 function GetCoordinates(e)

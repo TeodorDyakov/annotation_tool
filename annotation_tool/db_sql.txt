@@ -4,7 +4,7 @@ CREATE TABLE `annotation_tool`.`image` ( `imgId` VARCHAR(500) NOT NULL , PRIMARY
 
 CREATE TABLE `annotation_tool`.`label` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,
  `text` VARCHAR(200) NOT NULL , `x` FLOAT(4) NOT NULL ,
-  `y` FLOAT(4) NOT NULL , `imgid` VARCHAR(500) NOT NULL ,
+  `y` FLOAT(4) NOT NULL , `imgid` VARCHAR(500) NOT NULL , `css` VARCHAR(5000),
    PRIMARY KEY (`id`), INDEX (`imgid`)) ENGINE = InnoDB; ALTER TABLE `label` 
 ADD CONSTRAINT `label_ibfk_1` FOREIGN KEY (`imgId`) REFERENCES `image`(`imgId`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 

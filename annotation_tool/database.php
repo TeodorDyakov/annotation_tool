@@ -46,8 +46,8 @@ class Database
     $sql = "SELECT * FROM LABEL WHERE imgId = :imgId";
     $this->select_labels_by_imgId = $this->connection->prepare($sql);
 
-    $sql = "INSERT INTO label (text, x, y, imgId)
-          VALUES (:label, :X, :Y, :imgId)";
+    $sql = "INSERT INTO label (text, x, y, imgId, css)
+          VALUES (:label, :X, :Y, :imgId, :css)";
     $this->insert_label = $this->connection->prepare($sql);
 
     $sql = "SELECT * FROM image WHERE imgId = :imgId";

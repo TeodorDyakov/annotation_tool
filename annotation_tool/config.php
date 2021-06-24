@@ -10,7 +10,7 @@ Milen Petrov PhD, Doctor of Sciences, assistant: Nevena Gadzheva";
   $ROOT_FOLDER="c:\xampp\htdocs\annotation_tool"
   $DB_USER="root";
   $DB_PASS="";
-  $DB_NAME="www";
+  $DB_NAME="annotation_tool";
   $SITE_DESCRIPTION="Tool for image annotation";
 }
 ?>

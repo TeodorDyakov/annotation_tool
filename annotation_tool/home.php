@@ -28,7 +28,7 @@
         $rows = $query["data"]->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($rows as $row) {
-            echo "<a href='http://localhost/annotation_tool/?imgId=" . $row["imgId"] . "'>";
+            echo "<a href='label_page.php?imgId=" . $row["imgId"] . "'>";
             echo "<img src = '" . $row["imgId"] . "'>";
             echo "</a>";
         }

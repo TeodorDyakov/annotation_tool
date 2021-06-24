@@ -16,14 +16,17 @@
             <div id="form_container">
                 <form action="labels_db.php" method="post">
 
-                    <label for="label">Label</label>
+                    <label for="label">Label:</label>
                     <input type="text" name="label" id="label" value="example label" oninput="UpdateLabelText()"><br>
 
-                    <label for="X">X</label>
+                    <label for="X">X:</label>
                     <input type="text" name="X" id="X" value="0">
 
-                    <label for="label">Y</label>
+                    <label for="Y">Y:</label>
                     <input type="text" name="Y" id="Y" value="0">
+
+                    <label for="CSS">CSS:</label>
+                    <input type="text" name="css" id="css" value="">
 
                     <button type="button" onclick="SaveLabel()">Add new label</button>
                 </form>
@@ -47,8 +50,6 @@
 </body>
 <script src="js/script.js"></script>
 <script type="text/javascript">
-    // window.scrollTo(0,document.body.scrollHeight);
-
     var myImg = document.getElementById("imgToLabel");
     myImg.onmousedown = GetCoordinates;
 </script>

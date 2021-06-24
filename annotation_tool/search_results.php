@@ -19,7 +19,7 @@
     if(!$term){
         return;
     }
-    
+
     $select_labels = $db->selectAllLabelsQuery();
     $rows = $select_labels["data"]->fetchAll(PDO::FETCH_ASSOC);
     $results = array();
@@ -32,7 +32,7 @@
 
             $text = preg_replace('/(\S*'. $term .'\S*)/i', '<b>$1</b>', $text);
 
-            echo "<li><a href='http://localhost/annotation_tool/?imgId=" . $label["imgId"] . "'>" . $label["imgId"] . "</a></li>";
+            echo "<li><a href='label_page.php?imgId=" . $label["imgId"] . "'>" . $label["imgId"] . "</a></li>";
             echo "<p>". $text ."</p>";
             echo "<img class = 'searchRes' src = '" . $label["imgId"] . "'>";
         }
